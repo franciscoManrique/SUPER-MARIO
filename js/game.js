@@ -90,15 +90,12 @@ Game.prototype.collitions = function() {
       this.audios.src = "music/coin.mp3";
       this.audios.play();
       
-    } else if(obstacle instanceof Shooter || obstacle instanceof Helicopter) {
-      if (obstacle.isKilling(this.mario)) {
+    } else if((obstacle instanceof Shooter || obstacle instanceof Helicopter) &&  obstacle.isKilling(this.mario)) {
         this.obstaclesCollection.removeElement(obstacle); 
         this.score.updateScore(this.coinsKillEnemy);
-        
         this.score.msg(this.timeMsg);
         this.playSong("music/smashed.mp3");
-      } 
-      
+        
     } else if(obstacle instanceof BulletPack){
       this.obstaclesCollection.removeElement(obstacle);       
       this.mario.reloadBullets(this.collectBullets);

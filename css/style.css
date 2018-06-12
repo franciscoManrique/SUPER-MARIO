@@ -16,6 +16,8 @@ h2{
   text-align: center;
 }
 
+
+
 .fondoModal{
   position: fixed;
   width: 100%;
@@ -51,10 +53,15 @@ h2{
   width: 40%; 
 }
 
+.background0, .background1, .background2{
+  border-radius: 3px;
+}
+
 .background0:hover, .background1:hover, .background2:hover{
   transform: scale(1.2);
   transition: all .4s;
 }
+
 
 /* msg on screen */
 .reveal{
