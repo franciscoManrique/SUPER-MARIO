@@ -49,7 +49,7 @@ Game.prototype.start = function() {
 
 Game.prototype.stop = function() {
   clearInterval(this.drawIntervalId);
-};
+}
 
 //DRAW MARIO & BACKGROUND & OBSTACLES & SCORE
 Game.prototype.draw = function() {
@@ -91,11 +91,13 @@ Game.prototype.collitions = function() {
       this.audios.play();
       
     } else if((obstacle instanceof Shooter || obstacle instanceof Helicopter) &&  obstacle.isKilling(this.mario)) {
-        this.obstaclesCollection.removeElement(obstacle); 
-        this.score.updateScore(this.coinsKillEnemy);
-        this.score.msg(this.timeMsg);
-        this.playSong("music/smashed.mp3");
-
+      this.obstaclesCollection.removeElement(obstacle); 
+      this.score.updateScore(this.coinsKillEnemy);
+      
+      this.score.msg(this.timeMsg);
+      this.playSong("music/smashed.mp3");
+      
+      
     } else if(obstacle instanceof BulletPack){
       this.obstaclesCollection.removeElement(obstacle);       
       this.mario.reloadBullets(this.collectBullets);
