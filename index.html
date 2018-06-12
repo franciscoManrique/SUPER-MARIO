@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SUPER MARIO</title> 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <section class="hero">
+    <img src="img/hero/hero.JPG" class="heroImg" alt="hero">
+  </section>
+  
+  <div class="fondoModal">
+    <div class="contenidoModal col-xs-10">
+      <h2 class="text-uppercas">WELCOME TO SUPER MARIO RUN</h2>
+      <p> You have to collect as many coins as possible</p>
+      
+      <div class= "container">
+        <div class="row">
+          <div class="col-md-3">
+            <ul>
+              <li>Collect a coin: 1 coin</li>
+              <li>Collect a bullet pack: 3 bullets</li>
+              <li>Kill an enemy: 5 coins</li>
+              <li>Be killed by bullet: -1 life</li>
+              <br><span class="word"></span>
+            </ul>
+          </div>
+
+          <div class="col-md-3">
+            <p style="text-align:center; font-size: 16px;"> EASY</p>
+            <img src="img/backgrounds/thumbnail_0.png" class="background0" style="width:100%;" alt="thumbnail_0">
+          </div>
+          <div class="col-md-3">
+            <p style="text-align:center; font-size: 16px;"> HARD</p>
+            <img src="img/backgrounds/thumbnail_1.png" class="background1" style="width:100%;" alt="thumbnail_1">
+          </div>
+          <div class="col-md-3">
+            <p style="text-align:center; font-size: 16px;"> EXTREME</p>
+            <img src="img/backgrounds/thumbnail_2.png" class="background2" style="width:100%;" alt="thumbnail_2">
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+  <div class="fondoModal2" style="display: none;">
+    <div class="contenidoModal contenidoModalGameOver col-xs-10">
+      <h2 class="text-uppercas">GAME OVER</h2>
+      <div class= "container">
+        <div class="row">
+          <p>Your score is: <span class="score"></span></p>
+          <button type="button" class="pull-right reStart btn btn-primary">PLAY AGAIN?</button>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+  <canvas width="1300" height="800" id="canvas"></canvas>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="js/typed.min.js"></script>
+  <script src="js/obstacles/brick.js"></script>
+  <script src="js/obstacles/coin.js"></script>
+  <script src="js/obstacles/heart.js"></script>
+  <script src="js/obstacles/pipe.js"></script>
+  <script src="js/obstacles/bullet.js"></script>
+  <script src="js/obstacles/bullet-pack.js"></script>
+  <script src="js/obstacles/shooter.js"></script>
+  <script src="js/obstacles/helicopter.js"></script>
+  <script src="js/obstacle-collection.js"></script>
+  <script src="js/score.js"></script>  
+  <script src="js/mario.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+
