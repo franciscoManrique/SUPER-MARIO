@@ -28,12 +28,10 @@ function Game(canvas, songIntro, backgroundChosen, difficulty) {
   this.collectBullets = 3;
   
   this.timeMsg = 200;
-
-  this.paused = false;
 }
 
 Game.prototype.start = function() {
-  // if (!this.drawIntervalId) {
+  if (!this.drawIntervalId) {
     this.drawIntervalId = setInterval(function() {
       
       this.clean();
@@ -46,23 +44,11 @@ Game.prototype.start = function() {
       this.checkGameOver();
       
     }.bind(this), 1000 / this.fps);
-  // }
+  }
 };
 
 Game.prototype.stop = function() {
   clearInterval(this.drawIntervalId);
-};
-
-Game.prototype.pause = function(evt) {
-  if (evt.keyCode === 27 && !this.paused) {
-    clearInterval(this.drawIntervalId);
-    this.paused = true;
-  } else{
-    this.paused = !this.paused;
-    this.start();
-  }
-  console.log(this.paused);
-  
 };
 
 //DRAW MARIO & BACKGROUND & OBSTACLES & SCORE
@@ -191,7 +177,6 @@ Game.prototype.clean = function() {
 Game.prototype.listeners = function() {
   document.onkeydown = function(evt) {
     this.mario.onKeyDown(evt);
-    this.pause(evt);
   }.bind(this);
   
   document.onkeyup = function(evt) {
