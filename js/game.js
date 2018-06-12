@@ -47,6 +47,10 @@ Game.prototype.start = function() {
   }
 };
 
+Game.prototype.stop = function() {
+  clearInterval(this.drawIntervalId);
+}
+
 //DRAW MARIO & BACKGROUND & OBSTACLES & SCORE
 Game.prototype.draw = function() {
   this.background.draw();
@@ -91,35 +95,32 @@ Game.prototype.collitions = function() {
         this.obstaclesCollection.removeElement(obstacle); 
         this.score.updateScore(this.coinsKillEnemy);
         
-        //msg, coins & music
         this.score.msg(this.timeMsg);
-        this.audios.src = "music/smashed.mp3";
-        this.audios.play();
+        this.playSong("music/smashed.mp3");
       } 
       
     } else if(obstacle instanceof BulletPack){
       this.obstaclesCollection.removeElement(obstacle);       
       this.mario.reloadBullets(this.collectBullets);
-      
-      this.audios.src = "music/reload.mp3";
-      this.audios.play();
+      this.playSong("music/reload.mp3");
       
     } else if (obstacle instanceof Bullet) { 
       this.score.updateLifes(this.restLife);
       this.obstaclesCollection.removeElement(obstacle);
-      this.audios.src = "music/explosion.mp3";
-      this.audios.play();
+      this.playSong("music/explosion.mp3");
       
     } else if(obstacle instanceof Heart){
-      
       this.score.updateLifes(this.sumLife);
       this.obstaclesCollection.removeElement(obstacle);
-      // this.audios.src = "music/explosion.mp3";
-      // this.audios.play();
+      
     }
   }.bind(this));
 };
 
+Game.prototype.playSong = function(src) {
+  this.audios.src = src;
+  this.audios.play();
+};
 
 //BULLET MARIO HIT ENEMY
 Game.prototype.bulletCollideWithEnemy = function(){
@@ -155,9 +156,8 @@ Game.prototype.checkGameOver = function(){
   }
 };
 
-
 Game.prototype.gameOver = function(score){
-  clearInterval(this.drawIntervalId);
+  this.stop();
   $("#canvas").fadeOut(500, function() {
     $(".hero").fadeIn(500, function() {
       $(".fondoModal2").fadeIn(500);
