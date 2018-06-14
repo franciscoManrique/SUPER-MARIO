@@ -201,7 +201,6 @@ Game.prototype.listeners = function() {
 
   document.onclick = function(){
     this.mario.jump();
-    this.stop();
   }.bind(this);
 };
 
