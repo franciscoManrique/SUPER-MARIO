@@ -5,6 +5,7 @@
 
 body{
   overflow: hidden;
+  overflow-y: hidden;
 }
 
 .hero img{

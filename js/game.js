@@ -200,7 +200,8 @@ Game.prototype.listeners = function() {
   }.bind(this);
 
   document.onclick = function(){
-    this.mario.vy -= 10;
+    this.mario.jump();
+    this.stop();
   }.bind(this);
 };
 
