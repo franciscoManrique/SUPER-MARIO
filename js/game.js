@@ -21,13 +21,15 @@ function Game(canvas, songIntro, backgroundChosen, difficulty) {
   
   this.listeners();
   
-  this.collectCoin = 1;
+  this.collectCoin = 1000;
   this.coinsKillEnemy = 5;
   this.restLife = -1;
   this.sumLife = 1;
   this.collectBullets = 3;
   
   this.timeMsg = 200;
+  
+  this.paused = false;
 }
 
 Game.prototype.start = function() {
@@ -48,15 +50,26 @@ Game.prototype.start = function() {
 };
 
 Game.prototype.stop = function() {
-  clearInterval(this.drawIntervalId);
-}
+  if (!this.paused) {
+    this.paused = true;
+    clearInterval(this.drawIntervalId);
+    $('.paused').fadeIn(300);
+    this.songIntro.pause();
+  } else{
+    this.paused = false;
+    this.drawIntervalId = undefined;
+    this.start();
+    $('.paused').fadeOut(300);
+    this.songIntro.play();
+  }
+};
 
 //DRAW MARIO & BACKGROUND & OBSTACLES & SCORE
 Game.prototype.draw = function() {
   this.background.draw();
   this.mario.draw();
-  this.obstaclesCollection.draw();
   this.score.draw();
+  this.obstaclesCollection.draw();
 };
 
 
@@ -73,9 +86,28 @@ Game.prototype.gameUpdates = function(){
   this.score.updateBullet(this.mario.countingBullets());
 };
 
+Game.prototype.checkGameOver = function(){
+  if (this.score.gameOver) {
+    this.gameOver(this.score.score);
+    $('.paused').css('display', 'none');
+  }
+};
+
+
+Game.prototype.gameOver = function(score){
+  this.stop();
+  $("#canvas").fadeOut(500, function() {
+    $(".hero").fadeIn(500, function() {
+      $(".fondoModal2").fadeIn(500);
+      $("#score").text(score);
+    });
+  });
+};
+
+
 
 //CHECK ALL COLLITIONS WITH MARIO
-Game.prototype.collitions = function() {
+Game.prototype.collitions = function() { 
   
   //Collitions obstacles > mario
   var collitionsMario = this.mario.checkCollitions(this.obstaclesCollection.obstacles);
@@ -97,7 +129,6 @@ Game.prototype.collitions = function() {
       this.score.msg(this.timeMsg);
       this.playSong("music/smashed.mp3");
       
-      
     } else if(obstacle instanceof BulletPack){
       this.obstaclesCollection.removeElement(obstacle);       
       this.mario.reloadBullets(this.collectBullets);
@@ -110,8 +141,7 @@ Game.prototype.collitions = function() {
       
     } else if(obstacle instanceof Heart){
       this.score.updateLifes(this.sumLife);
-      this.obstaclesCollection.removeElement(obstacle);
-      
+      this.obstaclesCollection.removeElement(obstacle); 
     }
   }.bind(this));
 };
@@ -120,6 +150,7 @@ Game.prototype.playSong = function(src) {
   this.audios.src = src;
   this.audios.play();
 };
+
 
 //BULLET MARIO HIT ENEMY
 Game.prototype.bulletCollideWithEnemy = function(){
@@ -131,8 +162,7 @@ Game.prototype.bulletCollideWithEnemy = function(){
           this.obstaclesCollection.removeElement(obstacle); 
           this.score.updateScore(this.coinsKillEnemy);
           
-          this.audios.src = "music/explosion.mp3";
-          this.audios.play();
+          this.playSong("music/explosion.mp3");
         }        
       } else if(obstacle instanceof Bullet){
         
@@ -149,25 +179,6 @@ Game.prototype.bulletCollideWithEnemy = function(){
 };
 
 
-Game.prototype.checkGameOver = function(){
-  if (this.score.gameOver) {
-    this.gameOver(this.score.score);
-  }
-};
-
-Game.prototype.gameOver = function(score){
-  this.stop();
-  $("#canvas").fadeOut(500, function() {
-    $(".hero").fadeIn(500, function() {
-      $(".fondoModal2").fadeIn(500);
-      $(".score").text(score);
-    });
-  });
-  
-  this.songIntro.pause();
-  this.songIntro.currentTime = 0;
-};
-
 //CLEAN OBSTACLES & CANVAS & MARIO BULLETS
 Game.prototype.clean = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -176,13 +187,20 @@ Game.prototype.clean = function() {
 };
 
 //LISTENERS
-Game.prototype.listeners = function() {
+Game.prototype.listeners = function() {  
   document.onkeydown = function(evt) {
     this.mario.onKeyDown(evt);
+    if (evt.keyCode === 27) {
+      this.stop();
+    }
   }.bind(this);
   
   document.onkeyup = function(evt) {
     this.mario.onKeyUp(evt);
+  }.bind(this);
+
+  document.onclick = function(){
+    this.mario.vy -= 10;
   }.bind(this);
 };
 

@@ -50,14 +50,21 @@
       <h2 class="text-uppercas">GAME OVER</h2>
       <div class= "container">
         <div class="row">
-          <p>Your score is: <span class="score"></span></p>
+          <p>Your score is: <span id="score"></span></p> <br>
           <button type="button" class="pull-right reStart btn btn-primary">PLAY AGAIN?</button>
+        </div>
+        <div class="row">
+          <p>High score: <span id="new-top-score"></span></p>
         </div>
       </div>  
     </div>
   </div>
 
-  <canvas width="1300" height="800" id="canvas"></canvas>
+  <div class="paused">
+    <p>PAUSED</p>
+  </div>
+
+  <canvas id="canvas"></canvas>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="js/typed.min.js"></script>

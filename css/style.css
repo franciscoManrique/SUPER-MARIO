@@ -62,6 +62,19 @@ h2{
   transition: all .4s;
 }
 
+.paused{
+  font-size: 50px;
+  display: inline-block;
+  text-align: center;
+  font-family: monospace;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
 
 /* msg on screen */
 .reveal{

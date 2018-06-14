@@ -16,9 +16,8 @@ function Score(game) {
   
   this.score = 0;
   this.bulletsCollected = 0;
-  this.heartsLeft = 3;
+  this.heartsLeft = 1;
   this.game = game;
-  this.localStorage = game.localStorage;
   
   this.timingMsg = 500;
 
